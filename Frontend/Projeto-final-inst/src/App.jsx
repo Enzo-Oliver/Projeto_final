@@ -1,24 +1,24 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import img0 from "./assets/imagens/img0.jpg";
-import Header from "./cadrastro/Header";
-import Foto_cadrastro from "./cadrastro/Foto_cadrastro";
-import Form from "./cadrastro/Form";
+import Header from "./componentes_globais/Header";
+import Foto_cadrastro from "./rotas/Login/Foto_cadrastro";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Feed from "./Projeto-final-inst/Feed";
+import Login from "./rotas/Login/Login";
+import Feed from "./rotas/Feed/Feed";
+import Perfil from "./rotas/perfil/perfil";
+import Configuracao from "./rotas/Configuracao/Configuracao";
 
 function App() {
   return (
-    <>
-    {/* Pagina cadrastro: */}
-          <Header />
-          <Foto_cadrastro/>
-          <Form/>
-    {/* Pagina feed: */}
-
-
-    </>
+    <BrowserRouter>
+      <Routes> 
+        <Route path="/login" element={<Login />}/>
+        <Route path="/Feed" element={<Feed />}/>
+        <Route path="/perfil" element={<Perfil />}/> 
+        <Route path="/configuracao" element={<Configuracao />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
