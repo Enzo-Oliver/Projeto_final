@@ -1,4 +1,4 @@
-import Status from "./Status"
+import Status from "./../../componentes_globais/Status"
 import Header from "./../../componentes_globais/Header"
 import Posts from "./Posts"
 
