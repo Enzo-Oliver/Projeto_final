@@ -1,7 +1,9 @@
 import Header from "./../../componentes_globais/Header"
 import Cabecalho from "./cabecalho"
 import Informacaes from "./Informacaes"
-import Status from "./../../componentes_globais/Status"
+import Status2 from "./../../componentes_globais/Status2"
+import Galeria from "./Galeria"
+
 
 function perfil() {
   return (
@@ -9,7 +11,9 @@ function perfil() {
           <Header />
           <Cabecalho />
           <Informacaes />
-          <Status />
+          <Status2 />
+          <Galeria />
+          
     </>
   )
 }
