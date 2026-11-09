@@ -5,9 +5,12 @@ import Form from "./Form"
 function Login() {
   return (
     <>
-      <Header />
-      <Foto_cadrastro />
-      <Form />
+      <main className="container-fluid mt-5">
+        <div className="row align-items-center">
+          <Foto_cadrastro />
+          <Form />
+        </div>
+      </main>
     </>
   )
 }

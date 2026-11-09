@@ -1,119 +1,55 @@
-function Galeria() {
+function GradeFotos({ qtd, src }) {
+  const fotos = Array.from({ length: qtd }, (_, i) => i + 1);
+
   return (
-    <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                        aria-labelledby="pills-home-tab" tabindex="0">
-                        <div class="row gy-1 gx-1">
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/200x250" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/200x250" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/200x250" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                            <div class="col-12 col-md-6 col-lg-3"><img src="https://placehold.co/600" alt="post"
-                                    class="img-fluid"/></div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
-                        tabindex="0">
-                        <div class="row gy-1 gx-1">
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-4"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
-                        tabindex="0">
-                        <div class="row gy-1 gx-1">
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                            <div class="col-3"><img src="https://placehold.co/310x400" alt="post" class="img-fluid"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-  )
+    <div className="row justify-content-center gy-1 gx-1">
+      {fotos.map((id) => (
+        <div key={id} className="col-4">
+          <img
+            src={src}
+            alt={`post ${id}`}
+            className="img-fluid w-100 d-block"
+          />
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default Galeria
+function Galeria() {
+  return (
+    <div className="tab-content container" id="pills-tabContent">
+      <div
+        className="tab-pane fade show active"
+        id="pills-home"
+        role="tabpanel"
+        aria-labelledby="pills-home-tab"
+        tabIndex="0"
+      >
+        <GradeFotos qtd={15} src="https://placehold.co/600" />
+      </div>
+
+      <div
+        className="tab-pane fade"
+        id="pills-profile"
+        role="tabpanel"
+        aria-labelledby="pills-profile-tab"
+        tabIndex="0"
+      >
+        <GradeFotos qtd={15} src="https://placehold.co/310x400" />
+      </div>
+
+      <div
+        className="tab-pane fade"
+        id="pills-contact"
+        role="tabpanel"
+        aria-labelledby="pills-contact-tab"
+        tabIndex="0"
+      >
+        <GradeFotos qtd={15} src="https://placehold.co/310x400" />
+      </div>
+    </div>
+  );
+}
+
+export default Galeria;

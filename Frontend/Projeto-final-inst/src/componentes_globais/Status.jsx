@@ -1,22 +1,15 @@
+import { useState, useEffect } from 'react'
+
+const URL_API = 'http://localhost:3000'
+
 function Status() {
-  const stories = [
-    { id: 1, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 2, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 3, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 4, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 5, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 6, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 7, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 8, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 9, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 10, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 11, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 12, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 13, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 14, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 15, name: 'usuario', img: 'https://placehold.co/100x100' },
-    { id: 16, name: 'usuario', img: 'https://placehold.co/100x100' },
-  ];
+  const [stories, setStories] = useState([])
+
+  useEffect(() => {
+    fetch(`${URL_API}/stories`)
+      .then((r) => r.json())
+      .then((dados) => setStories(dados))
+  }, [])
 
   return (
     <div className="container py-3">

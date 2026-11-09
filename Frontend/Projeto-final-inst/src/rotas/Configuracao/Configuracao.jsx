@@ -1,7 +1,13 @@
+import Header from "../../componentes_globais/Header";
+import Formulario from "./Formulario";
+
 function Configuracao() {
   return (
-    <div>configuracao</div>
-  )
+    <>
+      <Header />
+      <Formulario />
+    </>
+  );
 }
 
-export default Configuracao
+export default Configuracao;
