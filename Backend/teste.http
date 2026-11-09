@@ -1,0 +1,23 @@
+### Listar posts
+GET http://localhost:3000/posts
+
+### Stories
+GET http://localhost:3000/stories
+
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{ "email": "enzo@gmail.com", "senha": "123456" }
+
+### Novo post
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{ "usuario": "enzooliverr_", "imagem": "https://placehold.co/600x400", "texto": "Meu post" }
+
+### Curtir
+PATCH http://localhost:3000/posts/1
+
+### Apagar
+DELETE http://localhost:3000/posts/1

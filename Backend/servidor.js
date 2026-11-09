@@ -4,132 +4,102 @@ import fs from 'fs'
 
 const app = express()
 const PORTA = 3000
-const ARQUIVO = 'tarefas.json'
+const ARQUIVO = 'dados.json'
 
 app.use(cors())
 app.use(express.json())
 
-let tarefas = [
-  { id: 1, texto: 'Instalar o Node.js', feita: true },
-  { id: 2, texto: 'Criar a API', feita: false },
-]
-
-app.get('/', (req, res) => {
-  res.send('Olá! O servidor está funcionando.')
-})
-
-app.get('/tarefas', (req, res) => {
-  res.json(tarefas)
-})
-
-app.post('/tarefas', (req, res) => {
-  const texto = req.body.texto
-
-  if (!texto || texto.trim() === '') {
-    return res.status(400).json({
-      erro: 'Escreva o texto da tarefa.'
-    })
-  }
-
-  const nova = {
-    id: Date.now(),
-    texto: texto.trim(),
-    feita: false
-  }
-
-  tarefas.push(nova)
-
-  res.status(201).json(nova)
-})
-
-app.patch('/tarefas/:id', (req, res) => {
-  const id = Number(req.params.id)
-
-  const tarefa = tarefas.find((t) => t.id === id)
-
-  if (!tarefa) {
-    return res.status(404).json({
-      erro: 'Tarefa não encontrada.'
-    })
-  }
-
-  tarefa.feita = !tarefa.feita
-
-  res.json(tarefa)
-})
-
-app.delete('/tarefas/:id', (req, res) => {
-  const id = Number(req.params.id)
-
-  tarefas = tarefas.filter((t) => t.id !== id)
-
-  res.status(204).end()
-})
-
-app.delete('/tarefas/:id', (req, res) => {
-  const id = Number(req.params.id)
- 
-  tarefas = tarefas.filter((t) => t.id !== id)
- 
-  res.status(204).end()
-})
-
-app.listen(PORTA, () => {
-  console.log(`Servidor rodando em http://localhost:${PORTA}`)
-})
-
 function carregar() {
   if (!fs.existsSync(ARQUIVO)) {
-    return []
+    return {
+      usuarios: [
+        { id: 1, nome: 'enzooliverr_', email: 'enzo@gmail.com', senha: '123456', bio: 'Tec. Redes | ADS - Senac' },
+      ],
+      posts: [
+        { id: 1, usuario: 'opovoonline', imagem: 'https://placehold.co/600x400', texto: 'Popular Atacadista inaugura unidade', curtidas: 0 },
+      ],
+      stories: [
+        { id: 1, name: 'usuario', img: 'https://placehold.co/100x100' },
+        { id: 2, name: 'usuario', img: 'https://placehold.co/100x100' },
+      ],
+    }
   }
   const texto = fs.readFileSync(ARQUIVO, 'utf-8')
   return JSON.parse(texto)
 }
 
 function salvar() {
-  fs.writeFileSync(ARQUIVO, JSON.stringify(tarefas, null, 2))
-}
- 
-// na rota POST
-tarefas.push(nova)
-salvar()
- 
-// na rota PATCH
-tarefa.feita = !tarefa.feita
-salvar()
- 
-// na rota DELETE
-tarefas = tarefas.filter((t) => t.id !== id)
-salvar()
- 
-let tarefas = carregar()
-
-async function adicionarTarefa(texto) {
-  await fetch(URL_API, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ texto: texto }),
-  })
-  carregarTarefas()
-}
-	async function alternarTarefa(id) {
-  await fetch(`${URL_API}/${id}`, { method: 'PATCH' })
-  carregarTarefas()
-}
- 
-async function removerTarefa(id) {
-  await fetch(`${URL_API}/${id}`, { method: 'DELETE' })
-  carregarTarefas()
+  fs.writeFileSync(ARQUIVO, JSON.stringify(dados, null, 2))
 }
 
-	async function carregarTarefas() {
-  try {
-    const resposta = await fetch(URL_API)
-    const dados = await resposta.json()
-    setTarefas(dados)
-    setErro('')
-  } catch {
-    setErro('Não consegui falar com o servidor. Ele está ligado?')
+let dados = carregar()
+
+app.get('/', (req, res) => {
+  res.send('Olá! O servidor está funcionando.')
+})
+
+app.get('/posts', (req, res) => {
+  res.json(dados.posts)
+})
+
+app.post('/posts', (req, res) => {
+  const { usuario, imagem, texto } = req.body
+
+  if (!imagem || imagem.trim() === '') {
+    return res.status(400).json({ erro: 'Coloque a imagem do post.' })
   }
-  setCarregando(false)
-}
+
+  const novo = { id: Date.now(), usuario, imagem, texto, curtidas: 0 }
+  dados.posts.push(novo)
+  salvar()
+  res.status(201).json(novo)
+})
+
+app.patch('/posts/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const post = dados.posts.find((p) => p.id === id)
+
+  if (!post) {
+    return res.status(404).json({ erro: 'Post não encontrado.' })
+  }
+
+  post.curtidas = post.curtidas + 1
+  salvar()
+  res.json(post)
+})
+
+app.delete('/posts/:id', (req, res) => {
+  const id = Number(req.params.id)
+  dados.posts = dados.posts.filter((p) => p.id !== id)
+  salvar()
+  res.status(204).end()
+})
+
+app.get('/stories', (req, res) => {
+  res.json(dados.stories)
+})
+
+app.post('/login', (req, res) => {
+  const { email, senha } = req.body
+  const usuario = dados.usuarios.find((u) => u.email === email && u.senha === senha)
+
+  if (!usuario) {
+    return res.status(401).json({ erro: 'Email ou senha errados.' })
+  }
+
+  res.json({ id: usuario.id, nome: usuario.nome, bio: usuario.bio })
+})
+
+app.get('/usuarios/:nome', (req, res) => {
+  const usuario = dados.usuarios.find((u) => u.nome === req.params.nome)
+
+  if (!usuario) {
+    return res.status(404).json({ erro: 'Usuário não encontrado.' })
+  }
+
+  res.json({ id: usuario.id, nome: usuario.nome, bio: usuario.bio })
+})
+
+app.listen(PORTA, () => {
+  console.log(`Servidor rodando em http://localhost:${PORTA}`)
+})
