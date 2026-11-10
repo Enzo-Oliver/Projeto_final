@@ -7,13 +7,17 @@ const PORTA = 3000
 const ARQUIVO = 'dados.json'
 
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ limit: '10mb' }))
 
 function carregar() {
   if (!fs.existsSync(ARQUIVO)) {
     return {
       usuarios: [
-        { id: 1, nome: 'enzooliverr_', email: 'enzo@gmail.com', senha: '123456', bio: 'Tec. Redes | ADS - Senac' },
+        {
+          id: 1, nome: 'enzooliverr_', email: 'enzo@gmail.com', senha: '123456',
+          bio: 'Tec. Redes | ADS - Senac', foto: 'https://placehold.co/300x300',
+          seguidores: 828, seguindo: 1059, link: 'https://github.com/Enzo-Oliver',
+        },
       ],
       posts: [
         { id: 1, usuario: 'opovoonline', imagem: 'https://placehold.co/600x400', texto: 'Popular Atacadista inaugura unidade', curtidas: 0 },
@@ -33,6 +37,18 @@ function salvar() {
 }
 
 let dados = carregar()
+
+function publico(u) {
+  return {
+    id: u.id,
+    nome: u.nome,
+    bio: u.bio ?? '',
+    foto: u.foto ?? 'https://placehold.co/300x300',
+    seguidores: u.seguidores ?? 0,
+    seguindo: u.seguindo ?? 0,
+    link: u.link ?? '',
+  }
+}
 
 app.get('/', (req, res) => {
   res.send('Olá! O servidor está funcionando.')
@@ -87,7 +103,7 @@ app.post('/login', (req, res) => {
     return res.status(401).json({ erro: 'Email ou senha errados.' })
   }
 
-  res.json({ id: usuario.id, nome: usuario.nome, bio: usuario.bio })
+  res.json(publico(usuario))
 })
 
 app.get('/usuarios/:nome', (req, res) => {
@@ -97,7 +113,39 @@ app.get('/usuarios/:nome', (req, res) => {
     return res.status(404).json({ erro: 'Usuário não encontrado.' })
   }
 
-  res.json({ id: usuario.id, nome: usuario.nome, bio: usuario.bio })
+  res.json(publico(usuario))
+})
+
+app.patch('/usuarios/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const usuario = dados.usuarios.find((u) => u.id === id)
+
+  if (!usuario) {
+    return res.status(404).json({ erro: 'Usuário não encontrado.' })
+  }
+
+  const { nome, bio, foto } = req.body
+
+  if (nome !== undefined) {
+    if (nome.trim() === '') {
+      return res.status(400).json({ erro: 'O nome de usuário não pode ficar vazio.' })
+    }
+    const existe = dados.usuarios.find((u) => u.nome === nome.trim() && u.id !== id)
+    if (existe) {
+      return res.status(409).json({ erro: 'Esse nome de usuário já está em uso.' })
+    }
+
+    dados.posts.forEach((p) => {
+      if (p.usuario === usuario.nome) p.usuario = nome.trim()
+    })
+    usuario.nome = nome.trim()
+  }
+
+  if (bio !== undefined) usuario.bio = bio
+  if (foto !== undefined) usuario.foto = foto
+
+  salvar()
+  res.json(publico(usuario))
 })
 
 app.listen(PORTA, () => {

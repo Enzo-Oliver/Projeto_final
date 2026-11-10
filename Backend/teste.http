@@ -1,9 +1,6 @@
 ### Listar posts
 GET http://localhost:3000/posts
 
-### Stories
-GET http://localhost:3000/stories
-
 ### Login
 POST http://localhost:3000/login
 Content-Type: application/json
@@ -19,5 +16,8 @@ Content-Type: application/json
 ### Curtir
 PATCH http://localhost:3000/posts/1
 
-### Apagar
-DELETE http://localhost:3000/posts/1
+### Configurações (trocar nome, bio e foto)
+PATCH http://localhost:3000/usuarios/1
+Content-Type: application/json
+
+{ "nome": "enzooliverr_", "bio": "Minha nova bio" }
