@@ -1,8 +1,16 @@
 const URL_API = 'http://localhost:3000'
 
 function Posts({ post, aoCurtir }) {
+  const logado = JSON.parse(localStorage.getItem('usuario'))
+
   async function curtir() {
     await fetch(`${URL_API}/posts/${post.id}`, { method: 'PATCH' })
+    aoCurtir()
+  }
+
+  async function apagar() {
+    if (!window.confirm('Apagar este post?')) return
+    await fetch(`${URL_API}/posts/${post.id}`, { method: 'DELETE' })
     aoCurtir()
   }
 
@@ -11,8 +19,14 @@ function Posts({ post, aoCurtir }) {
       <div className="row justify-content-center">
         <div className="col-8 col-md-8 col-lg-6">
           <div className="card-body d-flex flex-column align-items-center gap-3">
-            <div className="d-flex align-items-center px-2">
+            <div className="d-flex align-items-center justify-content-between w-100 px-2">
               <span className="fw-bold text-dark">{post.usuario}</span>
+
+              {logado && logado.nome === post.usuario && (
+                <button type="button" className="btn btn-danger btn-sm" onClick={apagar}>
+                  🗑️
+                </button>
+              )}
             </div>
 
             <img src={post.imagem} className="img-fluid rounded" alt={post.texto} />

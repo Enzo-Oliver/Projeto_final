@@ -28,63 +28,45 @@ function Form() {
   }
 
   return (
-    <main className="container-fluid mt-5">
-      <div className="row justify-content-center align-items-center">
+    <div style={{ flex: "0 1 380px" }}>
+      <form className="p-4" onSubmit={entrar}>
+        <div className="mb-4">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
 
-        {/* Imagem */}
-        <div className="col-12 col-md-6">
-          <img
-            src="https://placehold.co/600x600"
-            alt="Imagem ilustrativa"
-            className="img-fluid rounded"
+          <input
+            placeholder="usuario@gmail.com"
+            type="email"
+            className="form-control"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
-        {/* Formulário */}
-        <div className="col-12 col-md-6">
-          <form className="p-4" onSubmit={entrar}>
+        <div className="mb-4">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
 
-            <div className="mb-4">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-
-              <input
-                placeholder="usuario@gmail.com"
-                type="email"
-                className="form-control"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-
-              <input
-                placeholder="********"
-                type="password"
-                className="form-control"
-                id="password"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-              />
-            </div>
-
-            {erro && <p>{erro}</p>}
-
-            <button type="submit" className="btn btn-primary w-100">
-              Entrar
-            </button>
-
-          </form>
+          <input
+            placeholder="********"
+            type="password"
+            className="form-control"
+            id="password"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
         </div>
 
-      </div>
-    </main>
+        {erro && <p>{erro}</p>}
+
+        <button type="submit" className="btn btn-primary w-100">
+          Entrar
+        </button>
+      </form>
+    </div>
   );
 }
 

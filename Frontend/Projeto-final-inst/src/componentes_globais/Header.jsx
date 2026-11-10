@@ -1,4 +1,12 @@
+import { Link } from "react-router-dom";
+
 function Header() {
+   const logado = JSON.parse(localStorage.getItem("usuario"));
+
+   function sair() {
+     localStorage.removeItem("usuario");
+   }
+
    return (
        <nav className="navbar bg-1 fg-2">
           <div className="container-fluid">
@@ -16,7 +24,7 @@ function Header() {
             <span className="avatar">
               <img
                 className="avatar-img position-absolute top-0 end-0"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6sEZ6sPHMJwV8mAVPbKbKDB-JMMnHM7L8zJ-eOKJP5w&s=10"
+                src={logado ? logado.foto : "https://placehold.co/100x100"}
                 alt="mdo"
               />
             </span>
@@ -40,37 +48,26 @@ function Header() {
               <div className="drawer-body">
                 <ul className="navbar-nav me-auto mb-2">
                   <li className="nav-item">
-                    <a className="nav-link active" aria-current="page" href="#">
-                      Posts
-                    </a>
+                    <Link className="nav-link" to="/feed">
+                      Feed
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#">
-                      Salvos
-                    </a>
+                    <Link className="nav-link" to="/perfil">
+                      Perfil
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" aria-disabled="true">
-                      Reposts
-                    </a>
+                    <Link className="nav-link" to="/configuracao">
+                      Configurações
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" aria-disabled="true">
-                      Marcados
-                    </a>
+                    <Link className="nav-link" to="/login" onClick={sair}>
+                      Sair
+                    </Link>
                   </li>
                 </ul>
-                <form className="d-flex" role="search">
-                  <input
-                    className="form-control me-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                  <button className="btn-outline theme-success" type="submit">
-                    Search
-                  </button>
-                </form>
               </div>
             </dialog>
           </div>

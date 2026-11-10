@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Status from "./../../componentes_globais/Status"
 import Header from "./../../componentes_globais/Header"
 import Posts from "./Posts"
+import NovoPost from "./NovoPost"
 
 const URL_API = 'http://localhost:3000'
 
@@ -28,8 +29,9 @@ function Feed() {
     <>
       <Header />
       <Status />
+      <NovoPost aoPostar={carregarPosts} />
       {erro && <p>{erro}</p>}
-      {posts.map((p) => (
+      {[...posts].reverse().map((p) => (
         <Posts key={p.id} post={p} aoCurtir={carregarPosts} />
       ))}
     </>

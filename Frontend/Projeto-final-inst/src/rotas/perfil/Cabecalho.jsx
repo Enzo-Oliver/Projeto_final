@@ -1,4 +1,4 @@
-function Cabecalho() {
+function Cabecalho({ foto }) {
   return (
     <div className="position-relative w-100">
       <img
@@ -8,9 +8,9 @@ function Cabecalho() {
         alt="Imagem de fundo"
       />
       <img
-        src="https://placehold.co/300x300"
+        src={foto}
         className="position-absolute top-50 start-0 translate-middle-y ms-4 rounded-circle border border-5 border-white object-fit-cover"
-        style={{ width: "150px", height: "150px" }}
+        style={{ width: "200px", height: "200px" }}
         alt="Foto de perfil"
       />
     </div>

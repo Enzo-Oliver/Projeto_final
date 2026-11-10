@@ -1,9 +1,9 @@
 function Foto_cadrastro() {
   return (
-    <div className="col-12 md:col-6">
+    <div style={{ flex: "0 1 420px" }}>
       <img
         src="https://placehold.co/600x600"
-        className="img-fluid rounded-3 w-100"
+        className="rounded-3 w-100"
         alt="Foto de cadastro"
       />
     </div>

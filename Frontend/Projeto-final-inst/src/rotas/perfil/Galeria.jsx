@@ -16,7 +16,7 @@ function GradeFotos({ qtd, src }) {
   );
 }
 
-function Galeria() {
+function Galeria({ posts = [] }) {
   return (
     <div className="tab-content container" id="pills-tabContent">
       <div
@@ -26,7 +26,21 @@ function Galeria() {
         aria-labelledby="pills-home-tab"
         tabIndex="0"
       >
-        <GradeFotos qtd={15} src="https://placehold.co/600" />
+        {posts.length > 0 ? (
+          <div className="row justify-content-center gy-1 gx-1">
+            {[...posts].reverse().map((p) => (
+              <div key={p.id} className="col-4">
+                <img
+                  src={p.imagem}
+                  alt={p.texto}
+                  className="img-fluid w-100 d-block"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <GradeFotos qtd={15} src="https://placehold.co/600" />
+        )}
       </div>
 
       <div
